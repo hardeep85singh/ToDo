@@ -1,30 +1,26 @@
 package com.example.ToDo.controller;
-
-import com.example.ToDo.model.ToDo;
+import com.example.ToDo.service.UserService;
 import com.example.ToDo.model.User;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @RestController
 public class UserServiceController {
 
-    private Map<Long, User> userRepo = new HashMap<>();
+    @Autowired //UserService is injected
+    private UserService userService;
 
     @RequestMapping(value = "/users", method = RequestMethod.POST)
-    public ResponseEntity<Object> createUser(@RequestBody User user) {
-        user.setUserId(user.hashCode());
-        userRepo.put(user.getUserId(), user);
-        return new ResponseEntity<>("User is created", HttpStatus.CREATED);
+    public void createUser(@RequestBody User user) {
+        userService.createUser(user); //userService createUser method
     }
 
-    @RequestMapping(value = "/users")
-    public ResponseEntity<Object> getUsers() {
-        return new ResponseEntity<>(userRepo.values(), HttpStatus.OK);
-    }
+//    @RequestMapping(value = "/users")
+//    public List<User> getAllUsers() {
+//        return userService.getAllUsers(); //userService getAllUsers method
+//    }
 }
 
 
@@ -37,7 +33,9 @@ public class UserServiceController {
 
 
 
-
+//user.setUserId(user.hashCode());
+//        userRepo.put(user.getUserId(), user);
+//        return new ResponseEntity<>("User is created", HttpStatus.CREATED);
 
 
 

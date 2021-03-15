@@ -6,18 +6,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
 public class ToDoServiceController {
-    private Map<Long, ToDo> toDoRepo = new HashMap<>(); // Map into Map required
+    private Map<Long, List<ToDo>> toDoRepo = new HashMap<>(); // Map into Map required
 
 
     @RequestMapping(value = "/{userId}/todo", method = RequestMethod.POST)
     public ResponseEntity<Object> createToDo(@PathVariable("userId") String userId, @RequestBody ToDo todo){
 
         todo.setId(todo.hashCode());
-        toDoRepo.put(todo.getId(), todo);
+//        toDoRepo.put(todo.getId(), todo);
         return new ResponseEntity<>("ToDo is created", HttpStatus.CREATED);
     }
 
