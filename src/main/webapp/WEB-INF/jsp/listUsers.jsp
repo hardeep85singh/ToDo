@@ -16,21 +16,7 @@
 </head>
 <body>
 	<div class="container" ng-app="app">
-		<h1>New User</h1>
-
-		<div class="row">
-			<div ng-controller="postController" class="col-md-3">
-				<form name="userForm" ng-submit="submitForm()">
-					<label>FirstName</label>
-					<input type="text" name="firstname"	class="form-control" ng-model="firstname" />
-					<label>LastName</label>
-					<input type="text" name="lastname" class="form-control" ng-model="lastname" />
-					<button type="submit" class="btn btn-primary">Submit</button>
-				</form>
-				<p>{{postResultMessage}}</p>
-			</div>
-		</div>
-
+		<h1>List of Users</h1>
 		<div ng-controller="getAllUsersController" class="col-md-3">
         				<h3>List Users</h3>
         				<button ng-click="getAllUsers()">List all users</button>

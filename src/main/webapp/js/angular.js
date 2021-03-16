@@ -2,60 +2,48 @@ var app = angular.module('app', []);
 
 app.controller('postController', function($scope, $http, $location) {
 	$scope.submitForm = function(){
-		var url = $location.absUrl() + "users";
-
+		var url = "http://localhost:8090/addUser";
 		var config = {
                 headers : {
                     'Content-Type': 'application/json;charset=utf-8;'
                 }
         }
-
 		var data = {
             firstName: $scope.firstname,
             lastName: $scope.lastname
         };
-
-
 		$http.post(url, data, config).then(function (response) {
 			$scope.postResultMessage = "Sucessful!";
 		}, function (response) {
 			$scope.postResultMessage = "Fail!";
 		});
-
 		$scope.firstname = "";
 		$scope.lastname = "";
 	}
 });
-//
-//app.controller('getallusersController', function($scope, $http, $location) {
-//
-//	$scope.showAllCustomers = false;
-//
-//	$scope.getAllCustomers = function() {
-//		var url = $location.absUrl() + "users";
-//
-//		var config = {
-//			headers : {
-//				'Content-Type' : 'application/json;charset=utf-8;'
-//			}
-//		}
-//
-//		$http.get(url, config).then(function(response) {
-//
-//			if (response.data.status == "Done") {
-//				$scope.allcustomers = response.data;
-//				$scope.showAllCustomers = true;
-//
-//			} else {
-//				$scope.getResultMessage = "get All Customers Data Error!";
-//			}
-//
-//		}, function(response) {
-//			$scope.getResultMessage = "Fail!";
-//		});
-//
-//	}
-//});
+
+app.controller('getAllUsersController', function($scope, $http, $location) {
+
+	$scope.showAllUsers = false;
+	$scope.getAllUsers = function() {
+		var url = "http://localhost:8090/listUsers";
+		var config = {
+			headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			}
+		}
+		$http.get(url, config).then(function(response) {
+			if (response.status == 200) {
+				$scope.allUsers = response;
+				$scope.showAllUsers = true;
+			} else {
+				$scope.getResultMessage = "get All User Data Error!";
+			}
+		}, function(response) {
+			$scope.getResultMessage = "Fail!";
+		});
+	}
+});
 
 //app.controller('getcustomerController', function($scope, $http, $location) {
 //

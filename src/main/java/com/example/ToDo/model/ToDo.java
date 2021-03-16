@@ -1,9 +1,19 @@
 package com.example.ToDo.model;
 
+import javax.persistence.*;
 
+@Entity
+@Table(name = "ToDo_list")
 public class ToDo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="id")
     private long id;
+
+    @Column(name="ToDo")
     private String toDo;
+
+    @Column(name="Done")
     private boolean done;
 
     public ToDo(){};

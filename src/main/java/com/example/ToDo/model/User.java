@@ -2,6 +2,7 @@ package com.example.ToDo.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 @Entity //The @Entity annotation specifies that the class is an entity and is mapped to a database table
@@ -16,8 +17,12 @@ public class User implements Serializable {
 
     @Column(name="firstname")
     private String firstName;
+
     @Column(name="lastname")
     private String lastName;
+
+//    @Column(name="ToDo")
+//    private List<ToDo> toDo;
 
     public User(){
     }
@@ -25,6 +30,7 @@ public class User implements Serializable {
     public User(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
+//        this.toDo = toDo;
     }
 
     public long getUserId(){
@@ -60,4 +66,11 @@ public class User implements Serializable {
         return hash;
     }
 
+//    public List<ToDo> getToDo() {
+//        return toDo;
+//    }
+//
+//    public void setToDo(List<ToDo> toDo) {
+//        this.toDo = toDo;
+//    }
 }

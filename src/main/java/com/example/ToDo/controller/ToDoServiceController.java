@@ -1,33 +1,67 @@
 package com.example.ToDo.controller;
 
 import com.example.ToDo.model.ToDo;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.example.ToDo.service.ToDoService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 public class ToDoServiceController {
-    private Map<Long, List<ToDo>> toDoRepo = new HashMap<>(); // Map into Map required
 
+    @Autowired
+    private ToDoService toDoService;
 
-    @RequestMapping(value = "/{userId}/todo", method = RequestMethod.POST)
-    public ResponseEntity<Object> createToDo(@PathVariable("userId") String userId, @RequestBody ToDo todo){
+    @RequestMapping(value = "/addToDo", method = RequestMethod.POST)
+    public String addToDo(@RequestBody ToDo toDo){
+        return "addToDo";
 
-        todo.setId(todo.hashCode());
-//        toDoRepo.put(todo.getId(), todo);
-        return new ResponseEntity<>("ToDo is created", HttpStatus.CREATED);
+//        toDoService.createToDo(toDo);
+//        ModelAndView mv = new ModelAndView("addToDo");
+//        mv.addObject(toDo);
+//        return mv;
     }
 
-    @RequestMapping(value = "/{userId}/todo")
-    public ResponseEntity<Object> getToDoList(@PathVariable("userId") String userId){ // check required for userid
-        return new ResponseEntity<>(toDoRepo.values(), HttpStatus.OK);
+    @RequestMapping(value = "/addToDo")
+    public ModelAndView getToDo(){
+        ModelAndView mv = new ModelAndView("addToDo");
+        return mv;
     }
+
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    private Map<Long, List<ToDo>> toDoRepo = new HashMap<>(); // Map into Map required
+//
+//
+//    @RequestMapping(value = "/{userId}/todo", method = RequestMethod.POST)
+//    public ResponseEntity<Object> createToDo(@PathVariable("userId") String userId, @RequestBody ToDo todo){
+//
+//        todo.setId(todo.hashCode());
+////        toDoRepo.put(todo.getId(), todo);
+//        return new ResponseEntity<>("ToDo is created", HttpStatus.CREATED);
+//    }
+//
+//    @RequestMapping(value = "/{userId}/todo")
+//    public ResponseEntity<Object> getToDoList(@PathVariable("userId") String userId){ // check required for userid
+//        return new ResponseEntity<>(toDoRepo.values(), HttpStatus.OK);
+//    }
 
 
 
