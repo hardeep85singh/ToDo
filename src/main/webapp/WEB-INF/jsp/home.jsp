@@ -21,9 +21,9 @@
 		<div class="row">
 			<div ng-controller="postController" class="col-md-3">
 				<form name="userForm" ng-submit="submitForm()">
-					<label>FirstName</label>
+					<label>First Name</label>
 					<input type="text" name="firstname"	class="form-control" ng-model="firstname" />
-					<label>LastName</label>
+					<label>Last Name</label>
 					<input type="text" name="lastname" class="form-control" ng-model="lastname" />
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
@@ -32,22 +32,22 @@
 		</div>
 
 		<div ng-controller="getAllUsersController" class="col-md-3">
-        				<h3>List Users</h3>
-        				<button ng-click="getAllUsers()">List all users</button>
-        				<div ng-show="showAllUsers">
-        					<ol class="list-group">
-        						<li ng-repeat="user_data in allUsers.data"><h5 class="list-group-item">
-        								Id: {{user_data.userId}}<br />
-        								First Name: {{user_data.firstName}}<br />
-        								Last Name: {{user_data.lastName}} <br />
-        								<a href class="user ToDo list">Show ToDo List</a>
-        						</h5>
-        						</li>
-        					</ol>
-        				</div>
-        				<p>{{getResultMessage}}</p>
+        	<h3>List Users</h3>
+        	<button ng-click="getAllUsers()">List all users</button>
+        		<div ng-show="showAllUsers">
+        			<ol class="list-group">
+        				<li ng-repeat="user_data in allUsers.data"><h5 class="list-group-item">
+        					Id: {{user_data.userId}}<br />
+        					First Name: {{user_data.firstName}}<br />
+        					Last Name: {{user_data.lastName}} <br />
+        					<a href="http://localhost:8090/userToDo?user_id={{user_data.userId}}">User ToDo Page</a>
+        					</h5>
+        				</li>
+        			</ol>
+        		</div>
+        		<p>{{getResultMessage}}</p>
         </div>
-		</div>
+
 	</div>
 </body>
 </html>

@@ -3,45 +3,51 @@ package com.example.ToDo.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ToDo_list")
+@Table(name = "todo_list")
 public class ToDo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id")
+    @Column(name = "todoid")
     private long id;
 
-    @Column(name="ToDo")
+    @Column(name = "todo")
     private String toDo;
 
-    @Column(name="Done")
+    @Column(name = "Done")
     private boolean done;
 
-    public ToDo(){};
+    @Column(name = "userid")
+    private long userId;
 
-    public ToDo(String toDo){
+    public ToDo() {
+    }
+
+    public ToDo(String toDo) {
         this.toDo = toDo;
         done = false;
     }
 
-    public long getId(){
+    public long getId() {
         return id;
     }
 
-    public String getToDo(){
+    public String getToDo() {
         return toDo;
     }
 
-    public boolean isDone(){
+    public boolean isDone() {
         return done;
     }
 
-    public void setId(long id){
+    public void setId(long id) {
         this.id = id;
     }
 
-    @Override
-    public int hashCode(){
-        return toDo.hashCode();
+    public long getUserId() {
+        return userId;
     }
 
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 }

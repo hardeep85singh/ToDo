@@ -1,32 +1,31 @@
-var app = angular.module('app', []);
+var app = angular.module('toDoApp', []);
 
-app.controller('postController', function($scope, $http, $location) {
+app.controller('postControllerToDo', function($scope, $http, $location) {
 	$scope.submitForm = function(){
-		var url = "http://localhost:8090/addUser";
+		var url = "http://localhost:8090/addToDo";
 		var config = {
                 headers : {
                     'Content-Type': 'application/json;charset=utf-8;'
                 }
         }
 		var data = {
-            firstName: $scope.firstname,
-            lastName: $scope.lastname
+            toDo: $scope.todo,
         };
+
 		$http.post(url, data, config).then(function (response) {
 			$scope.postResultMessage = "Successful!";
 		}, function (response) {
 			$scope.postResultMessage = "Fail!";
 		});
-		$scope.firstname = "";
-		$scope.lastname = "";
+		$scope.todo = "";
 	}
 });
 
-app.controller('getAllUsersController', function($scope, $http, $location) {
+app.controller('getAllToDoController', function($scope, $http, $location) {
 
-	$scope.showAllUsers = false;
-	$scope.getAllUsers = function() {
-		var url = "http://localhost:8090/listUsers";
+	$scope.showAllToDo = false;
+	$scope.getAllToDo = function() {
+		var url = "http://localhost:8090/userToDos";
 		var config = {
 			headers : {
 				'Content-Type' : 'application/json;charset=utf-8;'
@@ -34,16 +33,15 @@ app.controller('getAllUsersController', function($scope, $http, $location) {
 		}
 		$http.get(url, config).then(function(response) {
 			if (response.status == 200) {
-				$scope.allUsers = response;
-				$scope.showAllUsers = true;
+				$scope.allToDo = response;
+				$scope.showAllToDo = true;
 			} else {
-				$scope.getResultMessage = "get All User Data Error!";
+				$scope.getResultMessage = "get All ToDo Data Error!";
 			}
 		}, function(response) {
 			$scope.getResultMessage = "Fail!";
 		});
 	}
-
 });
 
 //app.controller('getcustomerController', function($scope, $http, $location) {

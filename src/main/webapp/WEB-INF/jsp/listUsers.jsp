@@ -18,22 +18,21 @@
 	<div class="container" ng-app="app">
 		<h1>List of Users</h1>
 		<div ng-controller="getAllUsersController" class="col-md-3">
-        				<h3>List Users</h3>
-        				<button ng-click="getAllUsers()">List all users</button>
-        				<div ng-show="showAllUsers">
-        					<ol class="list-group">
-        						<li ng-repeat="user_data in allUsers.data"><h5 class="list-group-item">
-        								Id: {{user_data.userId}}<br />
-        								First Name: {{user_data.firstName}}<br />
-        								Last Name: {{user_data.lastName}} <br />
-        								<a href class="user ToDo list">Show ToDo List</a>
-        						</h5>
-        						</li>
-        					</ol>
-        				</div>
-        				<p>{{getResultMessage}}</p>
+        	<h3>List Users</h3>
+        		<button ng-click="getAllUsers()">List all users</button>
+            		<div ng-show="showAllUsers">
+        				<ol class="list-group">
+        					<li ng-repeat="user_data in allUsers.data"><h5 class="list-group-item">
+        						Id: {{user_data.userId}}<br />
+        						First Name: {{user_data.firstName}}<br />
+        						Last Name: {{user_data.lastName}} <br />
+        						<a href ng-click="userToDoPage()" class="user ToDo Page">User ToDo Page</a>
+        					</h5>
+        					</li>
+        				</ol>
+        	    	</div>
+        		<p>{{getResultMessage}}</p>
         </div>
-		</div>
 	</div>
 </body>
 </html>
