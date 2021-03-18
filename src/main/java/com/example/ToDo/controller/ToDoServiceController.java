@@ -16,26 +16,21 @@ public class ToDoServiceController {
     @Autowired
     private ToDoService toDoService;
 
-    @RequestMapping(value="/addToDo", method = RequestMethod.POST)
-    public ModelAndView addToDo(@RequestBody ToDo toDo){
-        toDoService.createToDo(toDo);
+    @RequestMapping(value = "/userToDo/{userId}")
+    public ModelAndView getUserToDoPage(@PathVariable long userId){
         ModelAndView mv = new ModelAndView("addToDo");
-        mv.addObject(toDo);
+        mv.addObject(toDoService.getToDosByUser(userId));
         return mv;
+    }
+
+    @RequestMapping(value="/userToDo/{userId}", method = RequestMethod.POST)
+    public void addToDo(@RequestBody ToDo toDo, @PathVariable long userId){
+        toDoService.createToDo(toDo, userId);
     }
 
     @RequestMapping(value = "/userToDo")
-    public ModelAndView getUserToDoPage(@RequestParam long user_id){
-
-        ModelAndView mv = new ModelAndView("addToDo");
-        mv.addObject(toDoService.getToDosByUser(user_id+1));
-        return mv;
-    }
-
-    @RequestMapping(value = "/userToDos")
     public List<ToDo> getUserToDos(){
         System.out.println("added to list");
         return toDoService.getAllToDos();
     }
-
 }

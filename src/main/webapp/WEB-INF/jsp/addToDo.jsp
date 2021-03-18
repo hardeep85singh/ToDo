@@ -4,7 +4,7 @@
 
 <html>
 <head>
-<title>{user} ToDo</title>
+<title>{{user}} ToDo</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <script
@@ -12,7 +12,7 @@
 <script src="/js/toDoAngular.js"></script>
 <link rel="stylesheet" href="style.css">
 
-	<h1>Welcome {{user_id}}</h1>
+	<h1>Welcome {{userId}}</h1>
 </head>
 <body>
 	<div class="container" ng-app="toDoApp">
@@ -21,8 +21,16 @@
 			<div ng-controller="postControllerToDo" class="col-md-3">
 
 				<form name="toDoForm" ng-submit="submitForm()">
-					<input type="text" name="todo"	class="form-control" ng-model="todo" placeholder="Add your new todo"/>
-					<button type="submit" class="btn btn-primary">Add</button>
+					<input type="text" name="toDo"	class="form-control" ng-model="toDo" placeholder="Add your new todo"/>
+					<button type="submit" ng-click ="getAllToDo()" class="btn btn-primary">Add</button>
+					<h3>ToDo List</h3>
+                              	<ol class="list-group" >
+                                    <li ng-repeat="todo_list in allToDo">
+
+                               		<input type="checkbox" name="toDoCheckBox" value="done"> {{todo_list.toDo}}
+
+                               		</li>
+                                </ol>
 				</form>
 				<p>{{postResultMessage}}</p>
 			</div>
@@ -30,9 +38,8 @@
 
 		<div style="overflow: auto;" ng-controller="getAllToDoController" class="col-md-3">
         	<h3>ToDo List</h3>
-        	<button ng-click="getAllToDo()">ToDo List</button>
-        	<ol class="list-group" >
-                <li style="overflow: auto;" ng-repeat="todo_list in allToDo.data">
+          	<ol class="list-group" >
+                <li ng-show ="getAllToDo()" ng-repeat="todo_list in allToDo">
 
            		<input type="checkbox" name="toDoCheckBox" value="done"> {{todo_list.toDo}}
 

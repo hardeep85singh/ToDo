@@ -7,10 +7,12 @@ import java.util.List;
 
 public interface ToDoService {
 
-    public void createToDo(ToDo toDo);
+    public void createToDo(ToDo toDo, long userId);
 
     public List<ToDo> getToDosByUser(long userId);
 
     public List<ToDo> getAllToDos();
+
+    public void setUserId(long userId);
 
 }

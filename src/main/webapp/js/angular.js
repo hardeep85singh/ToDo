@@ -9,16 +9,16 @@ app.controller('postController', function($scope, $http, $location) {
                 }
         }
 		var data = {
-            firstName: $scope.firstname,
-            lastName: $scope.lastname
+            firstName: $scope.firstName,
+            lastName: $scope.lastName
         };
 		$http.post(url, data, config).then(function (response) {
 			$scope.postResultMessage = "Successful!";
 		}, function (response) {
 			$scope.postResultMessage = "Fail!";
 		});
-		$scope.firstname = "";
-		$scope.lastname = "";
+		$scope.firstName = "";
+		$scope.lastName = "";
 	}
 });
 

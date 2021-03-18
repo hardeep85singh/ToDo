@@ -22,9 +22,9 @@
 			<div ng-controller="postController" class="col-md-3">
 				<form name="userForm" ng-submit="submitForm()">
 					<label>First Name</label>
-					<input type="text" name="firstname"	class="form-control" ng-model="firstname" />
+					<input type="text" name="firstName"	class="form-control" ng-model="firstName" />
 					<label>Last Name</label>
-					<input type="text" name="lastname" class="form-control" ng-model="lastname" />
+					<input type="text" name="lastName" class="form-control" ng-model="lastName" />
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
 				<p>{{postResultMessage}}</p>
@@ -40,7 +40,7 @@
         					Id: {{user_data.userId}}<br />
         					First Name: {{user_data.firstName}}<br />
         					Last Name: {{user_data.lastName}} <br />
-        					<a href="http://localhost:8090/userToDo?user_id={{user_data.userId}}">User ToDo Page</a>
+        					<a href="http://localhost:8090/userToDo/{{user_data.userId}}">User ToDo Page</a>
         					</h5>
         				</li>
         			</ol>

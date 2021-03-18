@@ -1,19 +1,22 @@
 package com.example.ToDo.model;
 
+import org.springframework.context.annotation.Configuration;
+
 import javax.persistence.*;
 
+@Configuration
 @Entity
 @Table(name = "todo_list")
 public class ToDo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "todoid")
+    @Column(name = "id")
     private long id;
 
     @Column(name = "todo")
     private String toDo;
 
-    @Column(name = "Done")
+    @Column(name = "done")
     private boolean done;
 
     @Column(name = "userid")
@@ -22,8 +25,9 @@ public class ToDo {
     public ToDo() {
     }
 
-    public ToDo(String toDo) {
+    public ToDo(String toDo, long userId) {
         this.toDo = toDo;
+        this.userId = userId;
         done = false;
     }
 

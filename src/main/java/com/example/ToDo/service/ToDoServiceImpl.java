@@ -1,14 +1,11 @@
 package com.example.ToDo.service;
 
 import com.example.ToDo.model.ToDo;
-import com.example.ToDo.model.User;
 import com.example.ToDo.repository.ToDoRepository;
-import com.example.ToDo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import java.util.LinkedList;
 import java.util.List;
 
 @Service("toDoService")
@@ -18,8 +15,8 @@ public class ToDoServiceImpl implements ToDoService {
     private ToDoRepository toDoRepository;
 
     @Override
-    public void createToDo(ToDo toDo) {
-        toDoRepository.save(new ToDo(toDo.getToDo()));
+    public void createToDo(ToDo toDo, long userId) {
+        toDoRepository.save(new ToDo(toDo.getToDo(), userId));
     }
 
     @Override
@@ -39,6 +36,11 @@ public class ToDoServiceImpl implements ToDoService {
     @Override
     public List<ToDo> getAllToDos() {
         return (List<ToDo>)toDoRepository.findAll();
+    }
+
+    @Override
+    public void setUserId(long userId) {
+//        toDoRepository.save(new ToDo(toDo.setUserId(userId)));
     }
 
 }
