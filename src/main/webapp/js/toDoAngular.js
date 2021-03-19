@@ -21,33 +21,32 @@ app.controller('postControllerToDo', function($scope, $http, $location) {
 		});
 		$scope.toDo = "";
 	}
-	$scope.showAllToDo = false;
-    	$scope.getAllToDo = function() {
-
-    		var url = "http://localhost:8090/userToDo";
-
-    		var config = {
-    			headers : {
-    				'Content-Type' : 'application/json;charset=utf-8;'
-    			}
-    		}
-    		$http.get(url, config).then(function(response) {
-    			if (response.status == 200) {
-    				$scope.allToDo = response.data;
-    				$scope.showAllToDo = true;
-    			} else {
-    				$scope.getResultMessage = "get All ToDo Data Error!";
-    			}
-    		}, function(response) {
-    			$scope.getResultMessage = "Fail!";
-    		});
-    	}
 });
 
-//app.controller('getAllToDoController', function($scope, $http, $location) {
-//
-//
-//});
+app.controller('getAllToDoController', function($scope, $http, $location) {
+
+	$scope.showAllToDo = false;
+	$scope.getAllToDo = function() {
+
+		var url = "http://localhost:8090/userToDo";
+
+		var config = {
+			headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			}
+		}
+		$http.get(url, config).then(function(response) {
+			if (response.status == 200) {
+				$scope.allToDo = response.data;
+				$scope.showAllToDo = true;
+			} else {
+				$scope.getResultMessage = "get All ToDo Data Error!";
+			}
+		}, function(response) {
+			$scope.getResultMessage = "Fail!";
+		});
+	}
+});
 
 //app.controller('getcustomerController', function($scope, $http, $location) {
 //

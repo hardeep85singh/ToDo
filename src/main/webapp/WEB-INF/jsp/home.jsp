@@ -27,7 +27,7 @@
 					<input type="text" name="lastName" class="form-control" ng-model="lastName" />
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
-				<p>{{postResultMessage}}</p>
+
 			</div>
 		</div>
 
@@ -44,8 +44,9 @@
         					</h5>
         				</li>
         			</ol>
+
         		</div>
-        		<p>{{getResultMessage}}</p>
+
         </div>
 
 	</div>

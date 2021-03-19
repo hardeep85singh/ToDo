@@ -4,49 +4,33 @@
 
 <html>
 <head>
-<title>{{user}} ToDo</title>
+<title>ToDo</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
-<script src="/js/toDoAngular.js"></script>
+<script src="/js/angular.js"></script>
 <link rel="stylesheet" href="style.css">
 
 	<h1>Welcome {{userId}}</h1>
 </head>
 <body>
-	<div class="container" ng-app="toDoApp">
-		<h1>{{firstName}} ToDo</h1>
+	<div class="container" ng-app="app">
+		<h1>Add ToDo</h1>
 		<div class="inputField">
-			<div ng-controller="postControllerToDo" class="col-md-3">
-
-				<form name="toDoForm" ng-submit="submitForm()">
+			<div ng-controller="toDoController" class="col-md-3">
+              	<form name="toDoForm" ng-submit="createToDo()">
 					<input type="text" name="toDo"	class="form-control" ng-model="toDo" placeholder="Add your new todo"/>
-					<button type="submit" ng-click ="getAllToDo()" class="btn btn-primary">Add</button>
-					<h3>ToDo List</h3>
-                              	<ol class="list-group" >
-                                    <li ng-repeat="todo_list in allToDo">
-
-                               		<input type="checkbox" name="toDoCheckBox" value="done"> {{todo_list.toDo}}
-
-                               		</li>
-                                </ol>
+					<button type="submit" class="btn btn-primary" ng-click="getToDo()">Add</button>
 				</form>
-				<p>{{postResultMessage}}</p>
+				<h3>ToDo List</h3>
+				   	<ol class="list-group" >
+                        <li ng-repeat="todo_list in toDoList">
+                         		<input type="checkbox"> {{todo_list.toDo}}
+                   		</li>
+                    </ol>
 			</div>
 		</div>
-
-		<div style="overflow: auto;" ng-controller="getAllToDoController" class="col-md-3">
-        	<h3>ToDo List</h3>
-          	<ol class="list-group" >
-                <li ng-show ="getAllToDo()" ng-repeat="todo_list in allToDo">
-
-           		<input type="checkbox" name="toDoCheckBox" value="done"> {{todo_list.toDo}}
-
-           		</li>
-            </ol>
-            <p>{{getResultMessage}}</p>
-        </div>
 	</div>
 </body>
 </html>
