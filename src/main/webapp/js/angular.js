@@ -59,15 +59,17 @@ app.controller('toDoController', function($scope, $http, $location) {
         };
 		$http.post(url, data, config).then(function (response) {
 			$scope.postResultMessage = "Successful!";
-			$scope.toDos.push(response.data);
+			//gettodolist
 		}, function (response) {
 			$scope.postResultMessage = "Not responding";
 		});
 		$scope.toDo = "";
 	}
 	$scope.showToDo = false;
-    	$scope.getToDo = function() {
-    		var geturl = "http://localhost:8090/userToDo";
+    $scope.getToDo = function() {
+            var geturl =  $location.absUrl();
+            alert("get todo");
+//            var geturl = "http://localhost:8090/userToDo";
     		var config = {
     			headers : {
     				'Content-Type' : 'application/json;charset=utf-8;'
@@ -76,7 +78,6 @@ app.controller('toDoController', function($scope, $http, $location) {
     		$http.get(geturl, config).then(function(response) {
     			if (response.status == 200) {
     				$scope.toDoList = response.data;
-    				$scope.toDos = response.data;
     				$scope.showToDo = true;
     			} else {
     				$scope.getResultMessage = "get All ToDo Data Error!";
@@ -84,18 +85,18 @@ app.controller('toDoController', function($scope, $http, $location) {
     		}, function(response) {
     			$scope.getResultMessage = "Fail!";
     		});
-    	}
+    }
 
 
     $scope.done = function() {
-        		var patchurl = $location.absUrl;
+        		var puturl = $location.absUrl;
         		var config = {
         			headers : {
         				'Content-Type' : 'application/json;charset=utf-8;'
         			}
         		}
 
-        		$http.patch(patchurl, data, config).then(function (response) {
+        		$http.put(puturl, data, config).then(function (response) {
                 			$scope.done = true;
                 		}, function (response) {
                 			$scope.patchResultMessage = "Not responding";
@@ -103,27 +104,4 @@ app.controller('toDoController', function($scope, $http, $location) {
                 		$scope.toDo = "";
 
         	}
-});
-
-app.controller('getAllToDoController', function($scope, $http, $location) {
-
-	$scope.showAllToDo = false;
-	$scope.getAllToDo = function() {
-		var url = "http://localhost:8090/userToDo";
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-		$http.get(url, config).then(function(response) {
-			if (response.status == 200) {
-				$scope.allToDo = response.data;
-				$scope.showAllToDo = true;
-			} else {
-				$scope.getResultMessage = "get All ToDo Data Error!";
-			}
-		}, function(response) {
-			$scope.getResultMessage = "Fail!";
-		});
-	}
 });

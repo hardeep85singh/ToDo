@@ -13,6 +13,4 @@ public interface ToDoService {
 
     public List<ToDo> getAllToDos();
 
-    public void setUserId(long userId);
-
 }

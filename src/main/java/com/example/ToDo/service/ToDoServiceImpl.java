@@ -20,16 +20,9 @@ public class ToDoServiceImpl implements ToDoService {
     }
 
     @Override
-    @Query("SELECT * from ToDo")
+    @Query("SELECT toDo from todo_list where toDo.userId = 1")
     public List<ToDo> getToDosByUser(long userId) {
-//        List<ToDo> toDoList = new LinkedList<>();
-//        Iterable<ToDo> iterable = toDoRepository.findAll();
-//        while(iterable.iterator().hasNext()){
-//            if(iterable.equals(userId)) {
-//                toDoList.add(iterable.iterator().next());
-//            }
-//        }
-//        return toDoList;
+
         return (List<ToDo>) toDoRepository.findAll();
     }
 
@@ -38,9 +31,5 @@ public class ToDoServiceImpl implements ToDoService {
         return (List<ToDo>)toDoRepository.findAll();
     }
 
-    @Override
-    public void setUserId(long userId) {
-//        toDoRepository.save(new ToDo(toDo.setUserId(userId)));
-    }
 
 }

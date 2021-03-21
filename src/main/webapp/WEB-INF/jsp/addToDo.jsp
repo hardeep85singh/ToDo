@@ -10,9 +10,10 @@
 <script
 	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
 <script src="/js/angular.js"></script>
-<link rel="stylesheet" href="style.css">
+ <link href="/css/bootstrap.css" rel="stylesheet" />
+ <link href="/css/bootstrap-theme.css" rel="stylesheet" />
 
-	<h1>Welcome {{userId}}</h1>
+	<h1>Welcome {{todo_list.userId}}</h1>
 </head>
 <body>
 	<div class="container" ng-app="app">
