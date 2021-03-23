@@ -17,20 +17,19 @@ public class ToDoServiceController {
     private ToDoService toDoService;
 
     @RequestMapping(value = "/userToDo/{userId}")
-    public List<ToDo> getUserToDoPage(@PathVariable long userId){
-//        ModelAndView mv = new ModelAndView("addToDo");
-        return toDoService.getToDosByUser(userId);
-//        return mv;
+    public ModelAndView getUserToDos(){
+        ModelAndView mv = new ModelAndView("addToDo");
+        return mv;
     }
 
     @RequestMapping(value="/userToDo/{userId}", method = RequestMethod.POST)
-    public void addToDo(@RequestBody ToDo toDo, @PathVariable long userId){
+    public List<ToDo> addToDo(@RequestBody ToDo toDo, @PathVariable long userId){
         toDoService.createToDo(toDo, userId);
+        return getUserToDoPage(userId);
     }
 
-    @RequestMapping(value = "/userToDo")
-    public List<ToDo> getUserToDos(){
-        System.out.println("added to list");
-        return toDoService.getAllToDos();
+    public List<ToDo> getUserToDoPage(long userId){
+        return toDoService.getToDosByUser(userId);
     }
+
 }

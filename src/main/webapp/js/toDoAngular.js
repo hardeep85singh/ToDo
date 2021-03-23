@@ -1,10 +1,63 @@
-var app = angular.module('toDoApp', []);
+var app = angular.module('app', []);
 
-app.controller('postControllerToDo', function($scope, $http, $location) {
+//app.config(['routeProvider', function($routeProvider){
+//    $routeProvider.when('/userToDo', {
+//    templateUrl: 'addToDo.jsp',
+//    controller: 'AddEventController'
+//    })
+//}]);
+
+
+app.controller('postController', function($scope, $http, $location) {
 	$scope.submitForm = function(){
+		var url = "http://localhost:8090/addUser";
+		var config = {
+                headers : {
+                    'Content-Type': 'application/json;charset=utf-8;'
+                }
+        }
+		var data = {
+            firstName: $scope.firstName,
+            lastName: $scope.lastName
+        };
+        $http.post(url, data, config).then(function (response) {
+			$scope.postResultMessage = "Successful!";
+		}, function (response) {
+			$scope.postResultMessage = "Fail!";
+		});
+		$scope.firstName = "";
+		$scope.lastName = "";
+	}
+});
+
+app.controller('getAllUsersController', function($scope, $http, $location) {
+
+	$scope.showAllUsers = false;
+	$scope.getAllUsers = function() {
+		var url = "http://localhost:8090/listUsers";
+		var config = {
+			headers : {
+				'Content-Type' : 'application/json;charset=utf-8;'
+			}
+		}
+		$http.get(url, config).then(function(response) {
+			if (response.status == 200) {
+				$scope.allUsers = response;
+				$scope.showAllUsers = true;
+			} else {
+				$scope.getResultMessage = "get All User Data Error!";
+			}
+		}, function(response) {
+			$scope.getResultMessage = "Fail!";
+		});
+	}
+
+});
+
+app.controller('toDoController', function($scope, $http, $location) {
+	$scope.showToDo = false;
+	$scope.createToDo = function(){
 	    var url =  $location.absUrl();
-//		var url = "http://localhost:8090/userToDo/{userId}";
-		console.log('enter');
 		var config = {
                 headers : {
                     'Content-Type': 'application/json;charset=utf-8;'
@@ -13,97 +66,61 @@ app.controller('postControllerToDo', function($scope, $http, $location) {
 		var data = {
             toDo: $scope.toDo,
         };
-
 		$http.post(url, data, config).then(function (response) {
+			if (response.status == 200) {
+                $scope.toDoList = response.data;
+                $scope.showToDo = true;
+            } else {
+            	$scope.getResultMessage = "get All ToDo Data Error!";
+            }
 			$scope.postResultMessage = "Successful!";
 		}, function (response) {
 			$scope.postResultMessage = "Not responding";
 		});
 		$scope.toDo = "";
 	}
+
+    $scope.getToDo = function() {
+            var geturl =  $location.absUrl();
+            alert("get todo");
+//            var geturl = "http://localhost:8090/userToDo";
+    		var config = {
+    			headers : {
+    				'Content-Type' : 'application/json;charset=utf-8;'
+    			}
+    		}
+    		$http.get(geturl, config).then(function(response) {
+    			if (response.status == 200) {
+    				$scope.toDoList = response.data;
+    				$scope.showToDo = true;
+    			} else {
+    				$scope.getResultMessage = "get All ToDo Data Error!";
+    			}
+    		}, function(response) {
+    			$scope.getResultMessage = "Fail!";
+    		});
+    }
+
+
+    $scope.done = function() {
+        		var puturl = $location.absUrl;
+        		alert("Check put method");
+        		var config = {
+        			headers : {
+        				'Content-Type' : 'application/json;charset=utf-8;'
+        			}
+        		}
+        		var data = {
+                            toDo: $scope.done,
+                        };
+        		$http.put(puturl, data, config).then(function (response) {
+        		            if ($scope.isDone == false){
+        		                $scope.done = true}
+        		            else{
+        		                $scope.done = false;
+        		            }
+                		}, function (response) {
+                			$scope.patchResultMessage = "Not responding";
+                		});
+        	}
 });
-
-app.controller('getAllToDoController', function($scope, $http, $location) {
-
-	$scope.showAllToDo = false;
-	$scope.getAllToDo = function() {
-
-		var url = "http://localhost:8090/userToDo";
-
-		var config = {
-			headers : {
-				'Content-Type' : 'application/json;charset=utf-8;'
-			}
-		}
-		$http.get(url, config).then(function(response) {
-			if (response.status == 200) {
-				$scope.allToDo = response.data;
-				$scope.showAllToDo = true;
-			} else {
-				$scope.getResultMessage = "get All ToDo Data Error!";
-			}
-		}, function(response) {
-			$scope.getResultMessage = "Fail!";
-		});
-	}
-});
-
-//app.controller('getcustomerController', function($scope, $http, $location) {
-//
-//	$scope.showCustomer = false;
-//
-//	$scope.getCustomer = function() {
-//		var url = $location.absUrl() + "customer/" + $scope.customerId;
-//
-//		var config = {
-//			headers : {
-//				'Content-Type' : 'application/json;charset=utf-8;'
-//			}
-//		}
-//
-//		$http.get(url, config).then(function(response) {
-//
-//			if (response.data.status == "Done") {
-//				$scope.customer = response.data;
-//				$scope.showCustomer = true;
-//
-//			} else {
-//				$scope.getResultMessage = "Customer Data Error!";
-//			}
-//
-//		}, function(response) {
-//			$scope.getResultMessage = "Fail!";
-//		});
-//
-//	}
-//});
-//
-//app.controller('getcustomersbylastnameController', function($scope, $http, $location) {
-//
-//	$scope.showCustomersByLastName = false;
-//
-//	$scope.getCustomersByLastName = function() {
-//		var url = $location.absUrl() + "findbylastname";
-//
-//		var config = {
-//			headers : {	'Content-Type' : 'application/json;charset=utf-8;' },
-//
-//			params: { 'lastName' : $scope.customerLastName }
-//		}
-//
-//		$http.get(url, config).then(function(response) {
-//
-//			if (response.data.status == "Done") {
-//				$scope.allcustomersbylastname = response.data;
-//				$scope.showCustomersByLastName = true;
-//
-//			} else {
-//				$scope.getResultMessage = "Customer Data Error!";
-//			}
-//
-//		}, function(response) {
-//			$scope.getResultMessage = "Fail!";
-//		});
-//
-//	}
-//});

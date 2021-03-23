@@ -7,17 +7,18 @@
 <title>ToDo Project</title>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<script
-	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
+<script	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
 <script src="/js/angular.js"></script>
+<script src="/js/angular-route.js"></script>
+<script src="/js/toDoAngular.js"></script>
 <link rel="stylesheet"
 	href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
 	<h1>ToDo Project</h1>
 </head>
-<body>
-	<div class="container" ng-app="app">
+<body ng-app="app">
+	<div class="panel">
 		<h1>New User</h1>
-
 		<div class="row">
 			<div ng-controller="postController" class="col-md-3">
 				<form name="userForm" ng-submit="submitForm()">
@@ -27,10 +28,8 @@
 					<input type="text" name="lastName" class="form-control" ng-model="lastName" />
 					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
-
 			</div>
 		</div>
-
 		<div ng-controller="getAllUsersController" class="col-md-3">
         	<h3>List Users</h3>
         	<button ng-click="getAllUsers()">List all users</button>
@@ -40,15 +39,13 @@
         					Id: {{user_data.userId}}<br />
         					First Name: {{user_data.firstName}}<br />
         					Last Name: {{user_data.lastName}} <br />
-        					<a href="http://localhost:8090/userToDo/{{user_data.userId}}">User ToDo Page</a>
+        					<a href="http://localhost:8090/userToDo/{{user_data.userId}}" ng-model="user_data.firstName">User ToDo Page</a>
+        					<div ng-view></div>
         					</h5>
         				</li>
         			</ol>
-
         		</div>
-
         </div>
-
 	</div>
 </body>
 </html>

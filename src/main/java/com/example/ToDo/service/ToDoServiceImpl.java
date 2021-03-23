@@ -20,10 +20,9 @@ public class ToDoServiceImpl implements ToDoService {
     }
 
     @Override
-    @Query("SELECT toDo from todo_list where toDo.userId = 1")
     public List<ToDo> getToDosByUser(long userId) {
 
-        return (List<ToDo>) toDoRepository.findAll();
+        return toDoRepository.findByUserid(userId);
     }
 
     @Override
