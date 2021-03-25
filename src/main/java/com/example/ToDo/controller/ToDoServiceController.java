@@ -28,6 +28,18 @@ public class ToDoServiceController {
         return getUserToDoPage(userId);
     }
 
+    @RequestMapping(value="/userToDo/{userId}", method = RequestMethod.PUT)
+    public void toDoDone(@RequestBody ToDo toDo, @PathVariable long userId){
+        toDoService.isDone(userId);
+    }
+
+
+    @RequestMapping(value="/userToDo/{userId}", method = RequestMethod.DELETE)
+    public List<ToDo> deleteToDo(@RequestBody ToDo toDo, @PathVariable long userId){
+        toDoService.deleteToDo(toDo, userId);
+        return getUserToDoPage(userId);
+    }
+
     public List<ToDo> getUserToDoPage(long userId){
         return toDoService.getToDosByUser(userId);
     }

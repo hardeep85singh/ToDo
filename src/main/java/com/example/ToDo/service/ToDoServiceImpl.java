@@ -26,8 +26,13 @@ public class ToDoServiceImpl implements ToDoService {
     }
 
     @Override
-    public List<ToDo> getAllToDos() {
-        return (List<ToDo>)toDoRepository.findAll();
+    public boolean isDone(long userId) {
+        return false;
+    }
+
+    @Override
+    public List<ToDo> deleteToDo(ToDo toDo, long userId) {
+        return null;
     }
 
 

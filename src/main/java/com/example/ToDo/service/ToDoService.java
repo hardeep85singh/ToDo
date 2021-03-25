@@ -11,6 +11,8 @@ public interface ToDoService {
 
     public List<ToDo> getToDosByUser(long userId);
 
-    public List<ToDo> getAllToDos();
+    public boolean isDone(long userId);
+
+    public List<ToDo> deleteToDo(ToDo toDo, long userId);
 
 }
